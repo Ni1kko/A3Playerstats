@@ -9,17 +9,13 @@
         header("Location: index.php");
         exit;
     }
-    else
-    {
-        /**if keyword exits**/
-        
-        $servername = "127.0.0.1";
-        $username   = "root";
-        $password   = "";
-        $dbname     = "altislife"; 
-        
+    else /**if keyword exits**/ 
+    { 
+        /**get database login**/
+        $database = json_decode(file_get_contents("config.json"))->database;  
+      
         /**check database connection**/
-        $conn = new mysqli($servername, $username, $password, $dbname);
+        $conn = new mysqli($database->host, $database->user, $database->password, $database->dbname);
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
