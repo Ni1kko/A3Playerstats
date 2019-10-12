@@ -23,7 +23,7 @@
         <!--Breadcrumb bar-->
         <nav aria-label="breadcrumb">  
             <ol class="breadcrumb breadcrumb-content-after bg-dark ">  
-                <li class="breadcrumb-item" aria-current="page"><a href="/">Home</a></li>   
+                <li class="breadcrumb-item" aria-current="page"><a href="index.php">Home</a></li>   
                 <li class="breadcrumb-item text-light active" aria-current="page">Result</li>  
             </ol>   
         </nav>
