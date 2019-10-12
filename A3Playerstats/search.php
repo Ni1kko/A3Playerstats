@@ -72,8 +72,9 @@
                 $_SESSION["searchKey"] = $searchKey;
                 $_SESSION["users"] = $users;
 
-                echo "Found a result for: ".$_SESSION["searchKey"]."<br>"; 
-                print_r($_SESSION["users"]);
+                //echo "Found a result for: ".$_SESSION["searchKey"]."<br>"; 
+                //print_r($_SESSION["users"]);
+                header("Location: result.php");
             }
             else
             {

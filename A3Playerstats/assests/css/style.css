@@ -19,55 +19,46 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-}
-
+} 
 * {
     font-family: 'Ubuntu', sans-serif;
     margin: 0;
     padding: 0;
-    color: var(--tertiary);
-    
-}
-
+    color: var(--tertiary); 
+} 
 *:focus {
     outline: none;
-}
- 
+} 
 a:active {
     -webkit-box-shadow: inset 10px 10px 50px -20px rgba(0,0,0,0.31);
     -moz-box-shadow: inset 10px 10px 50px -20px rgba(0,0,0,0.31);
     box-shadow: inset 10px 10px 50px -20px rgba(0,0,0,0.1);
-}
-
+} 
 input[type=submit]:active {
     -webkit-box-shadow: inset 10px 10px 50px -20px rgba(0,0,0,0.31);
     -moz-box-shadow: inset 10px 10px 50px -20px rgba(0,0,0,0.31);
     box-shadow: inset 10px 10px 50px -20px rgba(0,0,0,0.1);
 }
-
-
+ 
 
 /*
-    Index 
+    Index.php 
 */  
-
-
+ 
 /*curved site title*/  
 #simple_arc span{
-    color: #ed7a16; 
+    color: var(--primary);
 }
-
-
+ 
 /*breadcrumb bar*/  
 .breadcrumb-content-after .breadcrumb-item+.breadcrumb-item::before { 
     content: "›"; 
     vertical-align:top; 
-    color: #408080; 
+    color: var(--tertiary);
     font-size:35px; 
     line-height:18px; 
 }
-
-
+ 
 /*search box*/  
 .search {
     display: inline-block;
@@ -96,5 +87,18 @@ input[type=submit]:active {
 }
 
 
+/*
+    Result.php
+*/  
+.result {
+    display: block;
+    margin: 30px auto;
+    border: 3px solid var(--secondary);
+    width: 30%;
+    position: relative;
+    padding: 20px;
+    transition: .2s;
+    background-color: rgba(256,256,256,0.9);
+}
 
  
