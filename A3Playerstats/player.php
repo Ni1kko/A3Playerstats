@@ -1,11 +1,4 @@
-<?php
-    require_once("globals.php"); 
-    if (!$_GET['pid']){
-        header("Location: index.html");
-        exit;
-    }
-?>
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
   <head>
     <title>A3Playerstats | Player <?php echo $_GET['pid'];?></title>
@@ -16,15 +9,14 @@
 
 <!--header-->
  <header> 
+    <?php require_once("globals.php"); ?>
+    <?php if(!$_GET['pid']){ header("Location: index.html"); exit; } ?>
+
 </header>   
 
 <body class="py-4">
- 
-    <!--content-->
-    <div class="container">
-        <!-- 
-            Check result 
-        -->
+    <div class="container"> 
+
         <?php if($user=Database::Query('SELECT * FROM players WHERE pid=:pid', array(':pid'=>$_GET['pid']))[0]) : ?>  
                     
             <!--Breadcrumb bar-->
@@ -123,9 +115,22 @@
                                 <span style="color: white">Licenses</span>
                                 <span class="glyphicon glyphicon-chevron-down pull-right" aria-hidden="true"></span>
                             </a></p>
+                           
                             <div class="collapse" id="collapse3">
-                                <!--IT'S 5:24AM I CANT BE FUCKED WITH ANYMORE PHP --> 
-                                <?php PlayerInfo::DisplayLicenses($user);?>  
+                                <h1>Civ licenses</h1>
+                                <?php foreach(PlayerInfo::GetLicenses($user["civ_licenses"]) as $civ_license): ?>
+                                    <h4><span class="glyphicon glyphicon-ok" aria-hidden="true"></span><?php echo $civ_license[0]; echo $civ_license[1] == 1 ? " Yes<br>" : " No<br>";?></h4> 
+                                <?php endforeach; ?>  
+
+                                <h1>Cop licenses</h1>
+                                <?php foreach(PlayerInfo::GetLicenses($user["cop_licenses"]) as $cop_license): ?>
+                                    <h4><span class="glyphicon glyphicon-ok" aria-hidden="true"></span><?php echo $cop_license[0]; echo $cop_license[1] == 1 ? " Yes<br>" : " No<br>";?></h4> 
+                                <?php endforeach; ?>  
+
+                                <h1>Med licenses</h1>
+                                <?php foreach(PlayerInfo::GetLicenses($user["med_licenses"]) as $med_license): ?>
+                                    <h4><span class="glyphicon glyphicon-ok" aria-hidden="true"></span><?php echo $med_license[0]; echo $med_license[1] == 1 ? " Owned<br>" : " No<br>";?></h4> 
+                                <?php endforeach; ?>  
                             </div>
                         </div>
                     </div>
@@ -134,9 +139,6 @@
                 
             </div>
 
-        <!-- 
-            No results 
-        -->
         <?php else: ?>  
             <h1 class="text-center">No results found for: <?php echo $_GET['pid'];?></h1>
         <?php endif; ?>    
@@ -148,4 +150,5 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script type="text/javascript" src="assests/js/circletype.min.js"></script>
 </body> 
+
 </html>

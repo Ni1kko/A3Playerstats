@@ -1,4 +1,3 @@
-
 <?php 
     /*get Search Key**/
     $searchKey = $_GET['searchKey'];
