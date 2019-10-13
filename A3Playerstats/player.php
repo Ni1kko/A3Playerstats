@@ -14,7 +14,7 @@
 
 </header>   
 
-<body class="py-4">
+<body class="py-2">
     <div class="container"> 
 
         <?php if($user=Database::Query('SELECT * FROM players WHERE pid=:pid', array(':pid'=>$_GET['pid']))[0]) : ?>  
@@ -36,23 +36,23 @@
                     <!--Player Details-->
                     <div class="col-md-6">
                         <div class="unit">
-                            <p>Player Details</p>
+                            <h2>Player Details</h2>
+                            <p>&nbsp</p>
                             <p>Name: <a href="https://www.google.com/search?q=<?php echo $user['name'];?>"><span style="color: #ed7a16"><?php echo $user['name'];?></span></a></p>
                             <p>SteamID: <a href="https://steamcommunity.com/profiles/<?php echo $user['pid'];?>"><span style="color: #ed7a16"> <?php echo $user['pid'];?></span></a></p>
-                            <p>Server playtime: <span><?php echo (int)(((int)date('U', strtotime($user['last_seen'])) - (int)date('U', strtotime($user['insert_time'])))/3600);?> hours</span></p>
-                            <p>Joined: <span><?php echo $user['insert_time'];?></span></p>
-                            <p>Last Online: <span><?php echo $user['last_seen'];?></span></p>
+                            <p>Joined: <span><?php echo (int)(((int)date('U') - (int)date('U', strtotime($user['insert_time'])))/86400);?> Days ago</span></p> 
+                            <p>Last Seen: <span><?php echo (int)(((int)date('U') - (int)date('U', strtotime($user['last_seen'])))/86400) < 1 ? " Today" : (int)(((int)date('U') - (int)date('U', strtotime($user['last_seen'])))/86400) ." Days Ago";?></span></p>
+
                         </div>
                     </div>
 
                     <!--Cash Information-->
                     <div class="col-md-6">
                         <div class="unit">
-                            <p>Cash Information</p>
+                            <h2>Cash Information</h2>
                             <p>&nbsp</p>
                             <p>Bank: <span><?php echo strlen($user["bankacc"]) > 1 ? "$ " . $user["bankacc"] : "Nil";?></span></p>
                             <p>Cash: <span><?php echo strlen($user["cash"]) > 1 ? "$ " . $user["cash"] : "Nil";?></span></p>
-
                             <?php if($usergang=Database::Query('SELECT * FROM gangs WHERE owner=:owner', array(':owner'=>$_GET['pid']))[0]) : ?>  
                                 <p>Gang: <span><?php echo strlen($usergang["bank"]) > 0 ? "$ " . $usergang["bank"] : "Nil";?></span></p>
                             <?php else: ?> 
@@ -71,7 +71,7 @@
                             <p><a role="button" style="text-decoration: none" data-toggle="collapse" href="#collapse1" aria-expanded="false" aria-controls="collapse1">
                                 <span style="color: white">Faction Details</span>
                                 <span class="glyphicon glyphicon-chevron-down pull-right" aria-hidden="true"></span>
-                            </a></p>
+                            </a></p> 
                             <div class="collapse" id="collapse1">
                                 <p style="font-size: 18px;">Staff: <span style="color: red"><?php echo (int)$user['adminlevel']>0 ? "yes" : "no";?></span></p>
                                 <p style="font-size: 18px;">Police: <span style="color: blue"><?php echo (int)$user['coplevel']>0 ? "yes" : "no";?></span></p>
@@ -108,32 +108,35 @@
                 <!--Bottom row-->
                 <div class="row">
 
-                    <!--Licenses--> 
-                    <div class="col-md-12">
-                        <div class="unit" style="min-height: 150px !important"> 
-                            <p><a role="button" style="text-decoration: none" data-toggle="collapse" href="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                                <span style="color: white">Licenses</span>
-                                <span class="glyphicon glyphicon-chevron-down pull-right" aria-hidden="true"></span>
-                            </a></p>
-                           
-                            <div class="collapse" id="collapse3">
-                                <h1>Civ licenses</h1>
-                                <?php foreach(PlayerInfo::GetLicenses($user["civ_licenses"]) as $civ_license): ?>
-                                    <h4><span class="glyphicon glyphicon-ok" aria-hidden="true"></span><?php echo $civ_license[0]; echo $civ_license[1] == 1 ? " Yes<br>" : " No<br>";?></h4> 
-                                <?php endforeach; ?>  
-
-                                <h1>Cop licenses</h1>
-                                <?php foreach(PlayerInfo::GetLicenses($user["cop_licenses"]) as $cop_license): ?>
-                                    <h4><span class="glyphicon glyphicon-ok" aria-hidden="true"></span><?php echo $cop_license[0]; echo $cop_license[1] == 1 ? " Yes<br>" : " No<br>";?></h4> 
-                                <?php endforeach; ?>  
-
-                                <h1>Med licenses</h1>
-                                <?php foreach(PlayerInfo::GetLicenses($user["med_licenses"]) as $med_license): ?>
-                                    <h4><span class="glyphicon glyphicon-ok" aria-hidden="true"></span><?php echo $med_license[0]; echo $med_license[1] == 1 ? " Owned<br>" : " No<br>";?></h4> 
-                                <?php endforeach; ?>  
-                            </div>
-                        </div>
+                     <!--Civ licenses-->
+                    <div class="col-md-6">
+                        <div class="unit">
+                            <h1>Civ licenses</h1>
+                            <?php foreach(PlayerInfo::GetLicenses($user["civ_licenses"]) as $civ_license): ?>
+                                <p style="font-size: 18px;"><?php echo $civ_license[1] == 1 ? $civ_license[0].": <span style='color: green'>Yes</span>" : $civ_license[0].": <span style='color: red'>No</span>";?> </p>
+                            <?php endforeach; ?>  
+                        </div> 
                     </div>
+
+                     <!--Cop licenses-->
+                    <div class="col-md-6">
+                        <div class="unit">
+                            <h1>Cop licenses</h1>
+                            <?php foreach(PlayerInfo::GetLicenses($user["cop_licenses"]) as $cop_license): ?>
+                                <p style="font-size: 18px;"><?php echo $cop_license[1] == 1 ? $cop_license[0].": <span style='color: green'>Yes</span>" : $cop_license[0].": <span style='color: red'>No</span>";?> </p>
+                            <?php endforeach; ?> 
+                        </div> 
+                    </div>
+
+                    <!--Med licenses-->
+                    <div class="col-md-6">
+                        <div class="unit">
+                            <h1>Med licenses</h1>
+                            <?php foreach(PlayerInfo::GetLicenses($user["med_licenses"]) as $med_license): ?> 
+                                <p style="font-size: 18px;"><?php echo $med_licenses[1] == 1 ? $med_licenses[0].": <span style='color: green'>Yes</span>" : $med_licenses[0].": <span style='color: red'>No</span>";?> </p>
+                            <?php endforeach; ?>  
+                        </div> 
+                    </div> 
 
                 </div> 
                 
