@@ -1,26 +1,41 @@
 <?php 
 class PlayerInfo { 
      
-    public static function GetLicenses($a) { 
+    public static function GetLicenses($arma_string_array) { 
 
         if ($a === '"[]"' || $a === '') { 
-            return $licensesParsed; 
+            return array(); 
         }
 
-        $licenses = explode('],[', $a);
-        $licensesParsed = array(); 
-        foreach ($licenses as $value) 
-        {  
-            $license = array();
+        $licenses_available = array();  
+        $licenses_unavailable = array(); 
+
+        foreach (explode('],[', $arma_string_array) as $value) 
+        {    
             $value = str_replace('`', '', $value);
             $value = str_replace('"[[', '', $value);
-            $value = str_replace(']]"', '', $value); 
-            $explode = explode(',', $value); 
-            array_push($license, $explode[0]); 
-            array_push($license, $explode[1]); 
-            array_push($licensesParsed, $license); 
+            $value = str_replace(']]"', '', $value);  
+            $explode = explode(',', $value);  
+
+            $innerexplode = explode('_', $explode[0]);  
+            $innerexplode[0] = strtolower($innerexplode[0]);
+            $innerexplode[1] = strtolower($innerexplode[1]);
+            $innerexplode[2] = ucfirst($innerexplode[2]); 
+
+            if($innerexplode[0] == "license"){ 
+                if($innerexplode[1] == "civ" || $innerexplode[1] == "cop" || $innerexplode[1] == "med"){
+                    $license = array();  
+                    array_push($license, $innerexplode[2]); 
+                    array_push($license, $explode[1]);  
+                    if($explode[1] !== 1){
+                        array_push($licenses_available, $license);  
+                    }else{
+                        array_push($licenses_unavailable, $license);     
+                    } 
+                }
+            } 
         }  
-        return $licensesParsed;
+        return array_merge($licenses_unavailable,$licenses_available);
     }
 
 }

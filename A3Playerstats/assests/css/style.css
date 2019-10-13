@@ -6,7 +6,8 @@
     --primary: hsl(27, 85%, 50%);
     --secondary: #ecf0f1;
     --tertiary: #232323;
-
+    --quaternary: rgba(35, 35, 35, 0.9297);
+    --quinary : #0f0f0f;
     --hover: inset 0 0 5000px rgba(0,0,0,0.1); 
 
 }
@@ -40,7 +41,33 @@ input[type=submit]:active {
     -moz-box-shadow: inset 10px 10px 50px -20px rgba(0,0,0,0.31);
     box-shadow: inset 10px 10px 50px -20px rgba(0,0,0,0.1);
 }
- 
+
+/*
+    Container theme
+*/  
+.container-theme{
+    background-color: var(--quaternary);
+    border-radius: 4px;
+}
+
+
+
+/*
+    breadcrumb bar
+*/  
+.breadcrumb {
+    background-color: var(--tertiary);
+    border-radius: 4px;
+}
+.breadcrumb-content-after .breadcrumb-item+.breadcrumb-item::before { 
+    content: "›"; 
+    vertical-align:top; 
+    color: var(--primary);
+    font-size:35px; 
+    line-height:18px; 
+}
+
+
 
 /*
     index.html
@@ -49,15 +76,6 @@ input[type=submit]:active {
 /*curved site title*/  
 #simple_arc span{
     color: var(--primary);
-}
- 
-/*breadcrumb bar*/  
-.breadcrumb-content-after .breadcrumb-item+.breadcrumb-item::before { 
-    content: "›"; 
-    vertical-align:top; 
-    color: var(--tertiary);
-    font-size:35px; 
-    line-height:18px; 
 }
  
 /*search box*/  
@@ -101,5 +119,48 @@ input[type=submit]:active {
     transition: .2s;
     background-color: rgba(256,256,256,0.9);
 }
+  
 
- 
+/*
+    Player.php
+*/  
+.unit > *, .unit > * > * {
+    color: var(--secondary);
+}
+.unit {
+    border-style: solid;
+    border-color: #363333;
+    border-width: 2px;
+    padding: 15px;
+    background: var(--quinary);
+}
+.unit p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+}
+.label {    
+    padding: .1em; 
+    margin-bottom: 60px;
+    font-weight: bold; 
+    color: #fff;
+    text-align: center;
+    border-radius: .25em;
+    font-size: 18px;   
+}
+.unit .label-false {
+    background-color: red;
+}
+.unit .label-true {
+    background-color: green;
+}
+.unit-dropdown {    
+    padding: 7px;  
+    background-image: url("dropdown.png");
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+.unit-dropdown-right { 
+    float: right !important;
+    margin: 10px 10px 10px -50px; 
+}

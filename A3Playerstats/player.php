@@ -1,38 +1,48 @@
 <!DOCTYPE html> 
-<html>
-  <head>
-    <title>A3Playerstats | Player <?php echo $_GET['pid'];?></title>
-    <meta http-equiv="content-type" content="text/html; charset=windows-1252"> 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="assests/css/style.css"> 
-  </head>
+<html lang="en" class="full-height">
+    <head>
+        <title>A3Playerstats | Player <?php echo $_GET['pid'];?></title>
+        <meta http-equiv="content-type" content="text/html; charset=windows-1252"> 
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="assests/css/style.css"> 
+    </head>
+  
+    <body> 
 
-<!--header-->
- <header> 
-    <?php require_once("globals.php"); ?>
-    <?php if(!$_GET['pid']){ header("Location: index.html"); exit; } ?>
-
-</header>   
-
-<body class="py-2">
-    <div class="container"> 
-
-        <?php if($user=Database::Query('SELECT * FROM players WHERE pid=:pid', array(':pid'=>$_GET['pid']))[0]) : ?>  
-                    
-            <!--Breadcrumb bar-->
-            <nav aria-label="breadcrumb">  
-                <ol class="breadcrumb breadcrumb-content-after bg-dark ">  
-                <li class="breadcrumb-item" aria-current="page"><a href="index.html">Home</a></li>   
-                <li class="breadcrumb-item" aria-current="page"><a href="result.php">Result</a></li>  
-                <li class="breadcrumb-item text-light active" aria-current="page"><?php echo $user['name'];?></li>   
-                </ol>   
-            </nav>
-
-            <!--Content-->
-            <div class="container-fluid"> 
-            
+        <!--header-->
+        <header class="py-2"> 
+            <?php require_once("globals.php"); ?>
+            <?php if(!$_GET['pid']){ header("Location: index.html"); exit; } ?>
+            <nav class="navbar navbar-expand-lg black" style="background-color: var(--tertiary)">
+                <div class="container">
+                    <a class="navbar-brand white" href="#"><strong style="color: var(--secondary)">A3Playerstats</strong></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active"><a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a></li>
+                            <li class="nav-item"><a class="nav-link" href="leaderboards.php">Leaderboards</a></li> 
+                        </ul>
+                    </div>
+                </div>
+            </nav>  
+        </header>   
+        
+        <!--Content-->
+        <div class="container container-theme text-center pb-4"> 
+            <?php if($user=Database::Query('SELECT * FROM players WHERE pid=:pid', array(':pid'=>$_GET['pid']))[0]) : ?>  
+                  
+                <!--Breadcrumb bar-->
+                <div class="container p-0"> 
+                    <nav aria-label="breadcrumb">  
+                        <ol class="breadcrumb breadcrumb-content-after">   
+                            <li class="breadcrumb-item" ><a href="result.php">Search Results</a></li>  
+                        <li class="breadcrumb-item text-light active" aria-current="page"><?php echo $user['name'];?></li>   
+                        </ol>   
+                    </nav> 
+                </div>
+    
                 <!--Top row-->
-                <div class="row"> 
+                <div class="row" > 
                     <!--Player Details-->
                     <div class="col-md-6">
                         <div class="unit">
@@ -70,7 +80,7 @@
                         <div class="unit">
                             <p><a role="button" style="text-decoration: none" data-toggle="collapse" href="#collapse1" aria-expanded="false" aria-controls="collapse1">
                                 <span style="color: white">Faction Details</span>
-                                <span class="glyphicon glyphicon-chevron-down pull-right" aria-hidden="true"></span>
+                                <span class="unit-dropdown unit-dropdown-right" aria-hidden="true"></span>
                             </a></p> 
                             <div class="collapse" id="collapse1">
                                 <p style="font-size: 18px;">Staff: <span style="color: red"><?php echo (int)$user['adminlevel']>0 ? "yes" : "no";?></span></p>
@@ -85,7 +95,7 @@
                         <div class="unit">
                             <p><a role="button" style="text-decoration: none" data-toggle="collapse" href="#collapse2" aria-expanded="false" aria-controls="collapse2">
                                 <span style="color: white">Vehicle Details</span>
-                                <span class="glyphicon glyphicon-chevron-down pull-right" aria-hidden="true"></span>
+                                <span class="unit-dropdown unit-dropdown-right" aria-hidden="true"></span>
                             </a></p>
                             <div class="collapse" id="collapse2">
                                 <?php if($uservehicles=Database::Query('SELECT * FROM vehicles WHERE pid=:pid', array(':pid'=>$_GET['pid']))[0]) : ?>  
@@ -108,50 +118,45 @@
                 <!--Bottom row-->
                 <div class="row">
 
-                     <!--Civ licenses-->
-                    <div class="col-md-6">
+                    <!--Civ licenses-->
+                    <div class="col-md-4">
                         <div class="unit">
                             <h1>Civ licenses</h1>
                             <?php foreach(PlayerInfo::GetLicenses($user["civ_licenses"]) as $civ_license): ?>
-                                <p style="font-size: 18px;"><?php echo $civ_license[1] == 1 ? $civ_license[0].": <span style='color: green'>Yes</span>" : $civ_license[0].": <span style='color: red'>No</span>";?> </p>
+                                <span class='label label-<?php echo $civ_license[1]==1?"true":"false";?>'><?php echo $civ_license[0];?></span> 
                             <?php endforeach; ?>  
                         </div> 
                     </div>
 
-                     <!--Cop licenses-->
-                    <div class="col-md-6">
+                    <!--Cop licenses-->
+                    <div class="col-md-4">
                         <div class="unit">
                             <h1>Cop licenses</h1>
                             <?php foreach(PlayerInfo::GetLicenses($user["cop_licenses"]) as $cop_license): ?>
-                                <p style="font-size: 18px;"><?php echo $cop_license[1] == 1 ? $cop_license[0].": <span style='color: green'>Yes</span>" : $cop_license[0].": <span style='color: red'>No</span>";?> </p>
+                                <span class='label label-<?php echo $cop_license[1]==1?"true":"false";?>'><?php echo $cop_license[0];?></span>  
                             <?php endforeach; ?> 
                         </div> 
                     </div>
 
                     <!--Med licenses-->
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="unit">
                             <h1>Med licenses</h1>
                             <?php foreach(PlayerInfo::GetLicenses($user["med_licenses"]) as $med_license): ?> 
-                                <p style="font-size: 18px;"><?php echo $med_licenses[1] == 1 ? $med_licenses[0].": <span style='color: green'>Yes</span>" : $med_licenses[0].": <span style='color: red'>No</span>";?> </p>
+                            <span class='label label-<?php echo $med_licenses[1]==1?"true":"false";?>'><?php echo $med_licenses[0];?></span> 
                             <?php endforeach; ?>  
                         </div> 
                     </div> 
 
-                </div> 
-                
-            </div>
+                </div>  
 
-        <?php else: ?>  
-            <h1 class="text-center">No results found for: <?php echo $_GET['pid'];?></h1>
-        <?php endif; ?>    
-
-    </div> 
- 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="assests/js/circletype.min.js"></script>
-</body> 
-
-</html>
+            <?php else: ?>  
+                <h1 class="text-center">No results found for: <?php echo $_GET['pid'];?></h1>
+            <?php endif; ?>     
+        </div> 
+    
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body> 
+</html> 

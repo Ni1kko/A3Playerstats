@@ -1,31 +1,43 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>A3Playerstats | Search Results For <?php echo $_SESSION["searchKey"];?></title>
-    <meta http-equiv="content-type" content="text/html; charset=windows-1252"> 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="assests/css/style.css"> 
-  </head>
+<html lang="en" class="full-height">
+    <head>
+        <title>A3Playerstats | Search Results For <?php echo $_SESSION["searchKey"];?></title>
+        <meta http-equiv="content-type" content="text/html; charset=windows-1252"> 
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="assests/css/style.css"> 
+    </head> 
 
-<!--header-->
-<header> 
-    <?php require_once("globals.php"); ?> 
+    <body> 
 
-</header>  
-
-<body class="py-2">
-    <div class="container"> 
-         
-        <!--Breadcrumb bar-->
-        <nav aria-label="breadcrumb">  
-            <ol class="breadcrumb breadcrumb-content-after bg-dark ">  
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>   
-            <li class="breadcrumb-item text-light active" aria-current="page">Result</li>   
-            </ol>   
-        </nav>
-
+        <!--header-->
+        <header class="py-2"> 
+            <?php require_once("globals.php"); ?>   
+            <nav class="navbar navbar-expand-lg black" style="background-color: var(--tertiary)">
+                <div class="container">
+                    <a class="navbar-brand white" href="#"><strong style="color: var(--secondary)">A3Playerstats</strong></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active"><a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a></li>
+                            <li class="nav-item"><a class="nav-link" href="leaderboards.php">Leaderboards</a></li> 
+                        </ul>
+                    </div>
+                </div>
+            </nav>  
+        </header>   
+        
         <!--Content-->
-        <div class="container-fluid text-center"> 
+        <div class="container container-theme text-center pb-4"> 
+
+            <!--Breadcrumb bar-->
+            <div class="container p-0"> 
+                <nav aria-label="breadcrumb">  
+                    <ol class="breadcrumb breadcrumb-content-after">  
+                        <li class="breadcrumb-item text-light active" aria-current="page">Search Results</li>   
+                    </ol>   
+                </nav> 
+            </div>
+
             <!--search area-->
             <div class="search">
                 <form id="search" method="get" action="search.php">
@@ -35,7 +47,7 @@
             </div>
 
             <!--result brief-->
-            <div style="text-align: center; color: white;font-size: 40px;margin-top: 50px;margin-bottom: 50px">
+            <div style="text-align: center; color: white;font-size: 40px;">
                 Search for <span style="color: var(--primary); font-weight: 600;"><?php echo $_SESSION["searchKey"]?></span>
                 returned<span style="color: var(--primary) !important;font-weight: 600;"> <?php echo count($_SESSION["users"])?> result</span> 
             </div>
@@ -51,16 +63,13 @@
                     </a>
                 <?php endforeach; ?>
             </div>
-        </div>
- 
-    </div> 
-    
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="assests/js/circletype.min.js"></script>
-</body>
- 
+            
+        </div> 
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body> 
 </html> 
         
 
