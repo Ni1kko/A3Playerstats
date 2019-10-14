@@ -46,21 +46,18 @@
                     <!--Player Details-->
                     <div class="col-md-6">
                         <div class="player-colbox">
-                            <h2>Player Details</h2>
-                            <p>&nbsp</p>
+                            <h2>Player Details</h2> &nbsp;
                             <p>Name: <a href="https://www.google.com/search?q=<?php echo $user['name'];?>"><span style="color: #ed7a16"><?php echo $user['name'];?></span></a></p>
                             <p>SteamID: <a href="https://steamcommunity.com/profiles/<?php echo $user['pid'];?>"><span style="color: #ed7a16"> <?php echo $user['pid'];?></span></a></p>
                             <p>Joined: <span><?php echo PlayerInfo::DisplayDays($user['insert_time']);?></span></p> 
-                            <p>Last Seen: <span><?php echo PlayerInfo::DisplayDays($user['last_seen']);?></span></p> 
-
+                            <p>Last Seen: <span><?php echo PlayerInfo::DisplayDays($user['last_seen']);?></span></p>  
                         </div>
                     </div>
 
                     <!--Cash Information-->
                     <div class="col-md-6">
                         <div class="player-colbox">
-                            <h2>Cash Information</h2>
-                            <p>&nbsp</p>
+                            <h2>Cash Information</h2> &nbsp;
                             <p>Bank: <span><?php echo PlayerInfo::DisplayUserBank($user["bankacc"]);?></span></p>
                             <p>Cash: <span><?php echo PlayerInfo::DisplayUserBank($user["cash"]);?></span></p>
                             <p>Gang: <span><?php echo PlayerInfo::DisplayGangBank($user["pid"]);?></span></p> 
