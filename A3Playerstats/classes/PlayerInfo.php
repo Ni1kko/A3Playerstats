@@ -1,7 +1,46 @@
 <?php 
 class PlayerInfo { 
      
-    public static function GetLicenses($arma_string_array) { 
+    public static function DisplayDays($arma_time){
+        $days = (int)(((int)date('U') - (int)date('U', strtotime($arma_time)))/86400);
+ 
+        if($days > 0){
+            return "{$days} Days Ago"; 
+        } 
+
+        return "Today";
+    }
+ 
+    public static function DisplayUserCash($cash){
+        $cashvalue = "Nil";
+        if((int)$cash > 0){ 
+            $cashvalue = $cash;
+            return "$ {$cashvalue}";  
+        }   
+        return $cashvalue; 
+    }
+
+    public static function DisplayUserBank($bank){
+        $bankvalue = "Nil";
+        if((int)$bank > 0){ 
+            $bankvalue = $bank;
+            return "$ {$bankvalue}";  
+        }    
+        return $bankvalue; 
+    }
+
+    public static function DisplayGangBank($pid){
+        $bankvalue = "Nil";
+        if($usergang = Database::Query('SELECT * FROM gangs WHERE owner=:owner', array(':owner'=>$pid))[0]) {
+            if((int)$usergang["bank"] > 0){
+                $bankvalue = $usergang['bank'];
+                return "${$bankvalue}";  
+            }   
+        }
+        return $bankvalue; 
+    }
+
+    public static function DisplayLicenses($arma_string_array) { 
 
         if ($a === '"[]"' || $a === '') { 
             return array(); 
@@ -37,7 +76,6 @@ class PlayerInfo {
         }  
         return array_merge($licenses_unavailable,$licenses_available);
     }
-
 }
            
 ?>

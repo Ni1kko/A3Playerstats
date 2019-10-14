@@ -8,8 +8,7 @@
     --tertiary: #232323;
     --quaternary: rgba(35, 35, 35, 0.9297);
     --quinary : #0f0f0f;
-    --hover: inset 0 0 5000px rgba(0,0,0,0.1); 
-
+    --hover: inset 0 0 5000px rgba(0,0,0,0.1);  
 }
  
 
@@ -74,7 +73,7 @@ input[type=submit]:active {
 */  
  
 /*curved site title*/  
-#simple_arc span{
+#site-arc-title span{
     color: var(--primary);
 }
  
@@ -113,33 +112,51 @@ input[type=submit]:active {
     display: block;
     margin: 30px auto;
     border: 3px solid var(--secondary);
-    width: 30%;
+    width: 35%;
     position: relative;
     padding: 20px;
     transition: .2s;
     background-color: rgba(256,256,256,0.9);
 }
-  
+.result h3 {
+    font-size: 26px; 
+    letter-spacing: 1px;
+}
+.result h3 span{
+    font-size: 22px; 
+    letter-spacing: 2px;
+} 
+.result h4 {
+    font-size: 24px; 
+    letter-spacing: 1px;
+}
+.result h4 span{
+    font-size: 20px; 
+    letter-spacing: 1px;
+} 
+.result .span-theme{
+    color: var(--primary);
+}
 
 /*
     Player.php
 */  
-.unit > *, .unit > * > * {
+.player-colbox > *, .player-colbox > * > * {
     color: var(--secondary);
 }
-.unit {
+.player-colbox {
     border-style: solid;
     border-color: #363333;
     border-width: 2px;
     padding: 15px;
     background: var(--quinary);
 }
-.unit p {
+.player-colbox p {
     font-size: 18px;
     margin-bottom: 30px;
     letter-spacing: 2px;
 }
-.label {    
+.player-colbox .license-badge {    
     padding: .1em; 
     margin-bottom: 60px;
     font-weight: bold; 
@@ -148,19 +165,19 @@ input[type=submit]:active {
     border-radius: .25em;
     font-size: 18px;   
 }
-.unit .label-false {
+.player-colbox .license-badge-false {
     background-color: red;
 }
-.unit .label-true {
+.player-colbox .license-badge-true {
     background-color: green;
 }
-.unit-dropdown {    
+.player-colbox-dropdown {    
     padding: 7px;  
     background-image: url("dropdown.png");
     background-repeat: no-repeat;
     background-position: right center;
 }
-.unit-dropdown-right { 
+.player-colbox-dropdown-right { 
     float: right !important;
     margin: 10px 10px 10px -50px; 
 }

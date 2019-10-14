@@ -45,29 +45,25 @@
                 <div class="row" > 
                     <!--Player Details-->
                     <div class="col-md-6">
-                        <div class="unit">
+                        <div class="player-colbox">
                             <h2>Player Details</h2>
                             <p>&nbsp</p>
                             <p>Name: <a href="https://www.google.com/search?q=<?php echo $user['name'];?>"><span style="color: #ed7a16"><?php echo $user['name'];?></span></a></p>
                             <p>SteamID: <a href="https://steamcommunity.com/profiles/<?php echo $user['pid'];?>"><span style="color: #ed7a16"> <?php echo $user['pid'];?></span></a></p>
-                            <p>Joined: <span><?php echo (int)(((int)date('U') - (int)date('U', strtotime($user['insert_time'])))/86400);?> Days ago</span></p> 
-                            <p>Last Seen: <span><?php echo (int)(((int)date('U') - (int)date('U', strtotime($user['last_seen'])))/86400) < 1 ? " Today" : (int)(((int)date('U') - (int)date('U', strtotime($user['last_seen'])))/86400) ." Days Ago";?></span></p>
+                            <p>Joined: <span><?php echo PlayerInfo::DisplayDays($user['insert_time']);?></span></p> 
+                            <p>Last Seen: <span><?php echo PlayerInfo::DisplayDays($user['last_seen']);?></span></p> 
 
                         </div>
                     </div>
 
                     <!--Cash Information-->
                     <div class="col-md-6">
-                        <div class="unit">
+                        <div class="player-colbox">
                             <h2>Cash Information</h2>
                             <p>&nbsp</p>
-                            <p>Bank: <span><?php echo strlen($user["bankacc"]) > 1 ? "$ " . $user["bankacc"] : "Nil";?></span></p>
-                            <p>Cash: <span><?php echo strlen($user["cash"]) > 1 ? "$ " . $user["cash"] : "Nil";?></span></p>
-                            <?php if($usergang=Database::Query('SELECT * FROM gangs WHERE owner=:owner', array(':owner'=>$_GET['pid']))[0]) : ?>  
-                                <p>Gang: <span><?php echo strlen($usergang["bank"]) > 0 ? "$ " . $usergang["bank"] : "Nil";?></span></p>
-                            <?php else: ?> 
-                                <p>Gang: <span>Nil</span></p>
-                            <?php endif; ?> 
+                            <p>Bank: <span><?php echo PlayerInfo::DisplayUserBank($user["bankacc"]);?></span></p>
+                            <p>Cash: <span><?php echo PlayerInfo::DisplayUserBank($user["cash"]);?></span></p>
+                            <p>Gang: <span><?php echo PlayerInfo::DisplayGangBank($user["pid"]);?></span></p> 
                         </div>
                     </div>
                 </div>
@@ -77,10 +73,10 @@
 
                     <!--Faction Details-->
                     <div class="col-md-6">
-                        <div class="unit">
+                        <div class="player-colbox">
                             <p><a role="button" style="text-decoration: none" data-toggle="collapse" href="#collapse1" aria-expanded="false" aria-controls="collapse1">
                                 <span style="color: white">Faction Details</span>
-                                <span class="unit-dropdown unit-dropdown-right" aria-hidden="true"></span>
+                                <span class="player-colbox-dropdown player-colbox-dropdown-right" aria-hidden="true"></span>
                             </a></p> 
                             <div class="collapse" id="collapse1">
                                 <p style="font-size: 18px;">Staff: <span style="color: red"><?php echo (int)$user['adminlevel']>0 ? "yes" : "no";?></span></p>
@@ -92,10 +88,10 @@
 
                     <!--Vehicle Details-->
                     <div class="col-md-6">
-                        <div class="unit">
+                        <div class="player-colbox">
                             <p><a role="button" style="text-decoration: none" data-toggle="collapse" href="#collapse2" aria-expanded="false" aria-controls="collapse2">
                                 <span style="color: white">Vehicle Details</span>
-                                <span class="unit-dropdown unit-dropdown-right" aria-hidden="true"></span>
+                                <span class="player-colbox-dropdown player-colbox-dropdown-right" aria-hidden="true"></span>
                             </a></p>
                             <div class="collapse" id="collapse2">
                                 <?php if($uservehicles=Database::Query('SELECT * FROM vehicles WHERE pid=:pid', array(':pid'=>$_GET['pid']))[0]) : ?>  
@@ -103,7 +99,7 @@
                                     <h4><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Vehicle ID: <?php echo $uservehicle['id']?></h4>
                                     <h4><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ClassName: <?php echo $uservehicle['classname']?></h4>
                                     <h4><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Plate: <?php echo $uservehicle['plate']?></h4>
-                                    <h4><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Insert_Time: <?php echo $uservehicle['insert_time']?></h4>
+                                    <h4><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Purchased: <?php echo PlayerInfo::DisplayDays($uservehicle['insert_time']);?></h4>
                                     <h4><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Type: <?php echo $uservehicle['type']?></h4><br>  
                                     <?php endforeach; ?>  
                                 <?php else: ?> 
@@ -120,30 +116,30 @@
 
                     <!--Civ licenses-->
                     <div class="col-md-4">
-                        <div class="unit">
+                        <div class="player-colbox">
                             <h1>Civ licenses</h1>
-                            <?php foreach(PlayerInfo::GetLicenses($user["civ_licenses"]) as $civ_license): ?>
-                                <span class='label label-<?php echo $civ_license[1]==1?"true":"false";?>'><?php echo $civ_license[0];?></span> 
+                            <?php foreach(PlayerInfo::DisplayLicenses($user["civ_licenses"]) as $civ_license): ?>
+                                <span class='license-badge license-badge-<?php echo $civ_license[1]==1?"true":"false";?>'><?php echo $civ_license[0];?></span> 
                             <?php endforeach; ?>  
                         </div> 
                     </div>
 
                     <!--Cop licenses-->
                     <div class="col-md-4">
-                        <div class="unit">
+                        <div class="player-colbox">
                             <h1>Cop licenses</h1>
-                            <?php foreach(PlayerInfo::GetLicenses($user["cop_licenses"]) as $cop_license): ?>
-                                <span class='label label-<?php echo $cop_license[1]==1?"true":"false";?>'><?php echo $cop_license[0];?></span>  
+                            <?php foreach(PlayerInfo::DisplayLicenses($user["cop_licenses"]) as $cop_license): ?>
+                                <span class='license-badge license-badge-<?php echo $cop_license[1]==1?"true":"false";?>'><?php echo $cop_license[0];?></span>  
                             <?php endforeach; ?> 
                         </div> 
                     </div>
 
                     <!--Med licenses-->
                     <div class="col-md-4">
-                        <div class="unit">
+                        <div class="player-colbox">
                             <h1>Med licenses</h1>
-                            <?php foreach(PlayerInfo::GetLicenses($user["med_licenses"]) as $med_license): ?> 
-                            <span class='label label-<?php echo $med_licenses[1]==1?"true":"false";?>'><?php echo $med_licenses[0];?></span> 
+                            <?php foreach(PlayerInfo::DisplayLicenses($user["med_licenses"]) as $med_license): ?> 
+                                <span class='license-badge license-badge-<?php echo $med_licenses[1]==1?"true":"false";?>'><?php echo $med_licenses[0];?></span> 
                             <?php endforeach; ?>  
                         </div> 
                     </div> 
