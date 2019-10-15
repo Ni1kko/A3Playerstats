@@ -14,7 +14,16 @@
         }
   
         public static function DisplayMoney($money){
-            return ((int)$money > 0) ?  "$ ".number_format($money,0,",",".") : "Nil"; 
+            if($money > 999999999){
+                $money = 999999999;
+            }
+
+            if($money > 0){
+                $money = number_format($money,0,",",".");
+                return "$ {$money}"; 
+            } 
+
+            return "Nil";   
         }
    
         public static function DisplayLicenses($arma_string_array) {  
