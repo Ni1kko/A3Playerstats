@@ -2,42 +2,34 @@
     class PlayerInfo { 
         
         public static function DisplayDays($arma_time){
-            $days = (int)(((int)date('U') - (int)date('U', strtotime($arma_time)))/86400);
-    
-            if($days > 0){
-                return "{$days} Days Ago"; 
+            $days = (int)(((int)date('U') - (int)date('U', strtotime($arma_time)))/86400); 
+            
+            if($days == 0){
+                return "Today";
+            }elseif($days == 1){
+                return "Yesterday";
+            }elseif($days > 1){
+                return "{$days} Days Ago";
             } 
-
-            return "Today";
         }
     
         public static function DisplayUserCash($cash){
-            $cashvalue = "Nil";
-            if((int)$cash > 0){ 
-                $cashvalue = $cash;
-                return "$ {$cashvalue}";  
-            }   
-            return $cashvalue; 
+            return ((int)$cash > 0) ?  "$ ".number_format($cash,0,",",".") : "Nil"; 
         }
 
-        public static function DisplayUserBank($bank){
-            $bankvalue = "Nil";
-            if((int)$bank > 0){ 
-                $bankvalue = $bank;
-                return "$ {$bankvalue}";  
-            }    
-            return $bankvalue; 
+        public static function DisplayUserBank($bank){ 
+            return ((int)$bank > 0) ?  "$ ".number_format($bank,0,",",".") : "Nil"; 
         }
 
         public static function DisplayGangBank($pid){
-            $bankvalue = "Nil";
+            $bankvalue = 0;
             if($usergang = Database::Query('SELECT * FROM gangs WHERE owner=:owner', array(':owner'=>$pid))[0]) {
-                if((int)$usergang["bank"] > 0){
-                    $bankvalue = $usergang['bank'];
-                    return "${$bankvalue}";  
-                }   
-            }
-            return $bankvalue; 
+                $bankvalue = $usergang['bank']; 
+            }elseif($usergang = Database::Query('SELECT * FROM gangs WHERE active="1" AND members LIKE :member', array(':member'=> '%"'.$pid.'"%'))[0]){
+                $bankvalue = $usergang['bank']; 
+            } 
+            
+            return ($bankvalue > 0) ?  "$ ".number_format($bankvalue,0,",",".")  : $bankvalue; 
         }
 
         public static function DisplayLicenses($arma_string_array) { 
