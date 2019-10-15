@@ -23,11 +23,4 @@ function includeHTML() {
 
 includeHTML();
 
-function animateHome() {
-    $(document).ready(
-        function() {
-            new CircleType( document.getElementById('site-arc-title') ).radius(1200);
-        }
-    ); 
-};
  
