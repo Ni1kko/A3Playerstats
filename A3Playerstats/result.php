@@ -1,8 +1,8 @@
 <?php require_once("globals.php"); ?> 
 <!doctype html>
-<html lang="en">
+<html lang="en_gb" dir="ltr">
 
-<head>
+<head> 
     <!-- Encoding --><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
     <!-- Viewport --><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Author --><meta name="author" content="Nikko Renolds" />
@@ -13,7 +13,7 @@
     <!-- Font Awesome --><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <!-- Bootstrap core CSS --><link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">
-    <!-- Custom CSS --><link href="assests/css/style.css" rel="stylesheet">
+    <!-- Custom CSS --><link href="assests/css/style.css" rel="stylesheet">     
 </head>
 
 <body class="a3ps-body">
@@ -29,9 +29,9 @@
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                             <div class="collapse navbar-collapse" id="A3StatsNavBarToggle">
-                                <a class="navbar-brand" href="index.html">  A3Playerstats </a>
+                                <a class="navbar-brand" href="index.php">  A3Playerstats </a>
                                 <ul class="navbar-nav mr-auto mt-lg-0">
-                                    <li class="nav-item"> <a class="nav-link" href="index.html">Home</a> </li>
+                                    <li class="nav-item"> <a class="nav-link" href="index.php">Home</a> </li>
                                     <li class="nav-item"> <a class="nav-link" href="leaderboards.php">Leaderboards</a> </li>
                                 </ul>
                             </div>
@@ -52,7 +52,7 @@
                     <div class="card-header p-0 a3ps-breadcrumbs">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb m-0 a3ps-breadcrumb-content-after a3ps-background"> 
-                                <li class="breadcrumb-item text-light" aria-current="page"><a href="index.html">Search</a></li> 
+                                <li class="breadcrumb-item text-light" aria-current="page"><a href="index.php">Search</a></li> 
                                 <li class="breadcrumb-item text-light active" aria-current="page">Results</li> 
                             </ol>
                         </nav>
@@ -111,5 +111,5 @@
     <!-- MDB core JavaScript --><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/js/mdb.min.js"></script>
     <!-- Custom JavaScript --><script src="assests/js/functions.js" type="text/javascript"></script>
 </body>
-
+ 
 </html>

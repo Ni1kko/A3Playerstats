@@ -1,7 +1,8 @@
+<?php require_once("globals.php"); ?> 
 <!doctype html>
-<html lang="en">
+<html lang="en_gb" dir="ltr">
 
-<head>
+<head> 
     <!-- Encoding --><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
     <!-- Viewport --><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Author --><meta name="author" content="Nikko Renolds" />
@@ -12,11 +13,10 @@
     <!-- Font Awesome --><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <!-- Bootstrap core CSS --><link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">
-    <!-- Custom CSS --><link href="assests/css/style.css" rel="stylesheet">
+    <!-- Custom CSS --><link href="assests/css/style.css" rel="stylesheet">       
 </head>
-
+ 
 <body class="a3ps-body">
-
     <!--Header-->
     <div class="a3ps-header">
         <div class="container">
@@ -28,9 +28,9 @@
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                             <div class="collapse navbar-collapse" id="A3StatsNavBarToggle">
-                                <a class="navbar-brand" href="index.html">  A3Playerstats </a>
+                                <a class="navbar-brand" href="index.php">  A3Playerstats </a>
                                 <ul class="navbar-nav mr-auto mt-lg-0">
-                                    <li class="nav-item"> <a class="nav-link" href="index.html">Home</a> </li>
+                                    <li class="nav-item"> <a class="nav-link" href="index.php">Home</a> </li>
                                     <li class="nav-item"> <a class="nav-link" href="leaderboards.php">Leaderboards</a> </li>
                                 </ul>
                             </div>

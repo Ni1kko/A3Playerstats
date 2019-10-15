@@ -4,5 +4,14 @@
         "user" : "root",
         "password": "",
         "dbname":"altislife"
-    } 
+    },
+    "supported_browsers": {
+        "InternetExplorer" : "false",
+        "MozillaFirefox" : "true", 
+        "GoogleChrome" : "true",
+        "Opera" : "true",
+        "OperaMini" : "true",
+        "Safari" : "true",
+        "Other" : "true"
+    }
 }

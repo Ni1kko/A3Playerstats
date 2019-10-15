@@ -6,7 +6,7 @@
      * Check keyword exits
     **/
     if (!$searchKey){
-        header("Location: index.html");
+        header("Location: index.php");
         exit;
     }
 
@@ -47,7 +47,7 @@
     }
     else
     {
-        header("Location: index.html");
+        header("Location: index.php");
         exit;
     }
 ?>
