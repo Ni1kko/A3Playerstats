@@ -82,13 +82,13 @@
                                 <div class="col-md-6">
                                     <div class="a3ps-colbox">
                                         <h2>Cash Information</h2> &nbsp;
-                                        <p>Bank: <span><?php echo PlayerInfo::DisplayUserBank($user["bankacc"]);?></span></p>
-                                        <p>Cash: <span><?php echo PlayerInfo::DisplayUserBank($user["cash"]);?></span></p>
-                                        <p>Gang: <span><?php echo PlayerInfo::DisplayGangBank($user["pid"]);?></span></p> 
+                                        <p>Bank: <span><?php echo PlayerInfo::DisplayMoney($user["bankacc"]);?></span></p>
+                                        <p>Cash: <span><?php echo PlayerInfo::DisplayMoney($user["cash"]);?></span></p>
+                                        <p>Gang: <span><?php echo PlayerInfo::DisplayMoney(Database::GangBank($user["pid"]));?></span></p> 
                                     </div>
                                 </div>
                             </div>
-
+                            
                             <!--Middle row-->
                             <div class="row">
 

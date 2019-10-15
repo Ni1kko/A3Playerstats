@@ -12,26 +12,11 @@
                 return "{$days} Days Ago";
             } 
         }
-    
-        public static function DisplayUserCash($cash){
-            return ((int)$cash > 0) ?  "$ ".number_format($cash,0,",",".") : "Nil"; 
+  
+        public static function DisplayMoney($money){
+            return ((int)$money > 0) ?  "$ ".number_format($money,0,",",".") : "Nil"; 
         }
-
-        public static function DisplayUserBank($bank){ 
-            return ((int)$bank > 0) ?  "$ ".number_format($bank,0,",",".") : "Nil"; 
-        }
-
-        public static function DisplayGangBank($pid){
-            $bankvalue = 0;
-            if($usergang = Database::Query('SELECT * FROM gangs WHERE owner=:owner', array(':owner'=>$pid))[0]) {
-                $bankvalue = $usergang['bank']; 
-            }elseif($usergang = Database::Query('SELECT * FROM gangs WHERE active="1" AND members LIKE :member', array(':member'=> '%"'.$pid.'"%'))[0]){
-                $bankvalue = $usergang['bank']; 
-            } 
-            
-            return ($bankvalue > 0) ?  "$ ".number_format($bankvalue,0,",",".")  : $bankvalue; 
-        }
-
+   
         public static function DisplayLicenses($arma_string_array) { 
 
             if ($a === '"[]"' || $a === '') { 

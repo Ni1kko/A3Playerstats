@@ -83,8 +83,8 @@
                                                 <p class="h3 m-0 font-weight-normal text-truncate" style="color: hsl(27, 85%, 50%);"><?php echo $user["name"];?></p>
                                                 <h4 class="card-text m-0"><?php echo $user["pid"];?></h4>
                                                 <hr style="border-color: hsl(27, 85%, 50%); ">
-                                                <h4 class="float-left white-text h6">Bank: <span class="green-text"><?php echo PlayerInfo::DisplayUserBank($user["bankacc"]);?></span></h4>
-                                                <h4 class="float-right white-text h6">Cash: <span class="green-text"><?php echo PlayerInfo::DisplayUserBank($user["cash"]);?></span></h4>
+                                                <h4 class="float-left white-text h6">Bank: <span class="green-text"><?php echo PlayerInfo::DisplayMoney($user["bankacc"]);?></span></h4>
+                                                <h4 class="float-right white-text h6">Cash: <span class="green-text"><?php echo PlayerInfo::DisplayMoney($user["cash"]);?></span></h4>
                                             </a> 
                                         </div>
                                     </div>
