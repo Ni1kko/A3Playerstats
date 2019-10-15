@@ -22,7 +22,7 @@
     <div class="a3ps-header">
         <div class="container">
             <div class="row no-gutters d-flex justify-content-center">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <header> 
                         <nav class="navbar navbar-expand-lg navbar-dark sticky-top scrolling-navbar z-depth-0">
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#A3StatsNavBarToggle" aria-controls="A3StatsNavBarToggle" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,11 +43,10 @@
     </div>
 
     <!--content-->
-    <div class="container a3ps-content">
-
+    <div class="container a3ps-content pt-2"> 
         <div class="row no-gutters d-flex justify-content-center">
-            <div class="col-md-8 pt-5">
-                <div class="card mb-5 a3ps-background">
+            <div class="col-md-12">
+                <div class="card a3ps-background">
                     
                     <!--breadcrumbs-->
                     <div class="card-header p-0 a3ps-breadcrumbs">
@@ -80,11 +79,14 @@
                                     <div class="card" style="background-color: #171717">
                                         <div class="card-body">
                                             <a href="player.php?pid=<?php echo $user["pid"];?>">
+                                                <?php if($gangName = Database::GangName($user['pid'])): if($gangName != ""): ?>
+                                                    <p class="card-text m-0 text-truncate"><?php echo $gangName;?></p> 
+                                                <?php endif; endif; ?>
                                                 <p class="h3 m-0 font-weight-normal text-truncate" style="color: hsl(27, 85%, 50%);"><?php echo $user["name"];?></p>
                                                 <h4 class="card-text m-0"><?php echo $user["pid"];?></h4>
                                                 <hr style="border-color: hsl(27, 85%, 50%); ">
-                                                <h4 class="float-left white-text h6">Bank: <span class="green-text"><?php echo PlayerInfo::DisplayMoney($user["bankacc"]);?></span></h4>
-                                                <h4 class="float-right white-text h6">Cash: <span class="green-text"><?php echo PlayerInfo::DisplayMoney($user["cash"]);?></span></h4>
+                                                <h4 class="float-left white-text h6 text-truncate">Bank: <span class="green-text"><?php echo PlayerInfo::DisplayMoney($user["bankacc"]);?></span></h4>
+                                                <h4 class="float-right white-text h6 text-truncate">Cash: <span class="green-text"><?php echo PlayerInfo::DisplayMoney($user["cash"]);?></span></h4>
                                             </a> 
                                         </div>
                                     </div>
@@ -100,7 +102,7 @@
     </div>
 
     <!-- Footer -->
-    <div load-html="includes/footer.html"></div> 
+    <div class="mt-4 pt-4" load-html="includes/footer.html"></div> 
 
 
     <!-- JQuery --><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 

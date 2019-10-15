@@ -100,7 +100,7 @@
                 foreach($user_gangs as $user_gang){   
                     $gangname = $user_gang['name']; 
                     if ($user_gang['owner'] == 1) {
-                        break;
+                        break 1;
                     }
                 } 
             } 

@@ -22,7 +22,7 @@
     <div class="a3ps-header">
         <div class="container">
             <div class="row no-gutters d-flex justify-content-center">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <header> 
                         <nav class="navbar navbar-expand-lg navbar-dark sticky-top scrolling-navbar z-depth-0">
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#A3StatsNavBarToggle" aria-controls="A3StatsNavBarToggle" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,8 +45,8 @@
     <!--content-->
     <div class="container a3ps-content">
 
-        <div class="row no-gutters d-flex justify-content-center">
-            <div class="col-md-8 pt-5">
+    <div class="container a3ps-content pt-2"> 
+        <div class="row no-gutters d-flex justify-content-center">  
                 <div class="card mb-5 a3ps-background">
                     
                     <!--breadcrumbs-->

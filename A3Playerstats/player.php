@@ -23,7 +23,7 @@
     <div class="a3ps-header">
         <div class="container">
             <div class="row no-gutters d-flex justify-content-center">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <header> 
                         <nav class="navbar navbar-expand-lg navbar-dark sticky-top scrolling-navbar z-depth-0">
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#A3StatsNavBarToggle" aria-controls="A3StatsNavBarToggle" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,11 +44,11 @@
     </div>
 
     <!--content-->
-    <div class="container a3ps-content">
-
+    <div class="container a3ps-content pt-2"> 
         <div class="row no-gutters d-flex justify-content-center">
-            <div class="col-md-8 pt-5">
-                <div class="card mb-5 a3ps-background">
+            <div class="col-md-12">
+                <div class="card a3ps-background">
+                 
                     <?php if($user=Database::Query('SELECT * FROM players WHERE pid=:pid', array(':pid'=>$_GET['pid']))[0]) : ?>
 
                         <!--breadcrumbs-->
@@ -187,40 +187,41 @@
 
                             </div>
 
-                            <!--Bottom row-->
+                            <!--Bottom row--> 
                             <div class="row">
-
-                                <!--Civ licenses-->
-                                <div class="col-md-4">
+                                <div class="col-sm-12">
                                     <div class="a3ps-colbox">
-                                        <h1>Civ licenses</h1>
-                                        <?php foreach(PlayerInfo::DisplayLicenses($user["civ_licenses"]) as $civ_license): ?>
-                                            <span class='a3ps-playerlicense a3ps-playerlicense-<?php echo $civ_license[1]==1?"true":"false";?>'><?php echo $civ_license[0];?></span> 
-                                        <?php endforeach; ?>  
-                                    </div> 
+                                        <h2>Player Licenses</h2>
+                                        
+                                        <!--Civ licenses-->
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <h5>Civilian</h5>
+                                                <?php foreach(PlayerInfo::DisplayLicenses($user["civ_licenses"]) as $civ_license): ?>
+                                                    <span class='a3ps-playerlicense a3ps-playerlicense-<?php echo $civ_license[1]==1?"true":"false";?>'><?php echo $civ_license[0];?></span> 
+                                                <?php endforeach; ?>
+                                            </div>
+
+                                            <!--Cop licenses-->
+                                            <div class="col-sm-4">
+                                                <h5>Police</h5>
+                                                <?php foreach(PlayerInfo::DisplayLicenses($user["cop_licenses"]) as $cop_license): ?>
+                                                    <span class='a3ps-playerlicense a3ps-playerlicense-<?php echo $cop_license[1]==1?"true":"false";?>'><?php echo $cop_license[0];?></span>  
+                                                <?php endforeach; ?> 
+                                            </div>
+
+                                            <!--Med licenses-->
+                                            <div class="col-sm-4">
+                                                <h5>Medic</h5>
+                                                <?php foreach(PlayerInfo::DisplayLicenses($user["med_licenses"]) as $med_license): ?> 
+                                                    <span class='a3ps-playerlicense a3ps-playerlicense-<?php echo $med_licenses[1]==1?"true":"false";?>'><?php echo $med_licenses[0];?></span> 
+                                                <?php endforeach; ?>  
+                                            </div>
+
+                                        </div>
+                                    </div>
                                 </div>
-
-                                <!--Cop licenses-->
-                                <div class="col-md-4">
-                                    <div class="a3ps-colbox">
-                                        <h1>Cop licenses</h1>
-                                        <?php foreach(PlayerInfo::DisplayLicenses($user["cop_licenses"]) as $cop_license): ?>
-                                            <span class='a3ps-playerlicense a3ps-playerlicense-<?php echo $cop_license[1]==1?"true":"false";?>'><?php echo $cop_license[0];?></span>  
-                                        <?php endforeach; ?> 
-                                    </div> 
-                                </div>
-
-                                <!--Med licenses-->
-                                <div class="col-md-4">
-                                    <div class="a3ps-colbox">
-                                        <h1>Med licenses</h1>
-                                        <?php foreach(PlayerInfo::DisplayLicenses($user["med_licenses"]) as $med_license): ?> 
-                                            <span class='a3ps-playerlicense a3ps-playerlicense-<?php echo $med_licenses[1]==1?"true":"false";?>'><?php echo $med_licenses[0];?></span> 
-                                        <?php endforeach; ?>  
-                                    </div> 
-                                </div> 
-
-                            </div>  
+                            </div>
                                         
                         </div>
 
