@@ -84,7 +84,9 @@
                                         <h2>Cash Information</h2> &nbsp;
                                         <p>Bank: <span><?php echo PlayerInfo::DisplayMoney($user["bankacc"]);?></span></p>
                                         <p>Cash: <span><?php echo PlayerInfo::DisplayMoney($user["cash"]);?></span></p>
-                                        <p>Gang: <span><?php echo PlayerInfo::DisplayMoney(Database::GangBank($user["pid"]));?></span></p> 
+                                        <?php if($gangBank = Database::GangBank($user["pid"])): if($gangBank > 0): ?>
+                                            <p>Gang: <span><?php echo PlayerInfo::DisplayMoney($gangBank);?></span></p>
+                                        <?php endif; endif; ?> 
                                     </div>
                                 </div>
                             </div>
@@ -99,10 +101,13 @@
                                             <span style="color: white">Faction Details</span>
                                             <span class="dropdown" aria-hidden="true"></span>
                                         </a></p> 
-                                        <div class="collapse" id="collapse-factions">
+                                        <div class="collapse" id="collapse-factions"> 
                                             <p style="font-size: 18px;">Staff: <span style="color: red"><?php echo (int)$user['adminlevel']>0 ? "yes" : "no";?></span></p>
                                             <p style="font-size: 18px;">Police: <span style="color: blue"><?php echo (int)$user['coplevel']>0 ? "yes" : "no";?></span></p>
-                                            <p style="font-size: 18px;">NHS: <span style="color: green"><?php echo (int)$user['mediclevel']>0 ? "yes" : "no";?></span></p>
+                                            <p style="font-size: 18px;">Medics: <span style="color: green"><?php echo (int)$user['mediclevel']>0 ? "yes" : "no";?></span></p>
+                                            <?php if($gangName = Database::GangName($user['pid'])): if($gangName != ""): ?>
+                                                    <p>Gang: <span style="color: #ed7a16"><?php echo $gangName;?></span></p>
+                                            <?php endif; endif; ?>
                                         </div>
                                     </div>
                                 </div>
